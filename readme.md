@@ -20,7 +20,15 @@
   The raw data: 'disaster_categories.csv' and 'disaster_messages.csv' can be accessed in folder 'data'.
 
   I used the ETL pipeline to clean the data. The cleaned data is saved as 'DisasterResponse.db' in folder 'data'.
-
+  
+  * Insights from the dataset
+  	This dataset is imbalanced. Some labels like water,child-alone,tools, shops, firs, cold have very few data, while some like 'related', 'aid-related','Direct Report' have more examples.
+  	To some extend, this imbalance affects the model training. I noted that the latter 3 categories tend to be the easy-predicted results with my model.
+  	Very probably that more weights are put on these 3-4 categories when compute precision or recall for the various categories during the training process.
+  	Thus these categories turn to be match most cases, in other words, they are more possible to be predicted.
+  	
+  	One solution maybe to adjust the weights of different categories to compute their precisions or recalls.
+ 
 #model
 
   The trained model is stored in a pickle file: 'classifier.pkl' under folder 'models'.
