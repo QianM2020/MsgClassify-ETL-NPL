@@ -21,6 +21,9 @@
 
   I used the ETL pipeline to clean the data. The cleaned data is saved as 'DisasterResponse.db' in folder 'data'.
 
+#model
+
+  The trained model is stored in a pickle file: 'classifier.pkl' under folder 'models'.
 
 #Components
 
