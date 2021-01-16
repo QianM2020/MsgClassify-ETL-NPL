@@ -1,0 +1,4 @@
+*.txt
+Instruction.md
+Procfile
+.DS_Store
