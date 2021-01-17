@@ -68,6 +68,7 @@
         'Tokennize.py' can tokenize and lemmatize the message contents.
         
 #Run Project Web App
+
 	Run the following command in the app's directory to run the project web app.
     `python run.py`
     Run the following command
