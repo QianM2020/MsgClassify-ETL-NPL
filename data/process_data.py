@@ -5,6 +5,10 @@ import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    '''
+    The function loads data from messages.csv,categories.csv,
+    and merge them into a dataframe.
+    '''
     messages = pd.read_csv(messages_filepath)
     #messages.head()
     categories = pd.read_csv(categories_filepath)
@@ -16,6 +20,10 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''
+    The function splits categories into separate category columns,
+    converts category values to just numbers 0 or 1, and removes duplicates.
+    '''
     categories = df['categories'].str.split(';',expand=True)
     row = categories.iloc[1]
     # use this 1st row to extract a list of new column names for categories.
@@ -25,7 +33,7 @@ def clean_data(df):
     for column in categories:
         # set each value to be the last character of the string
         categories[column] = categories[column].str.get(-1)
-        categories[column] = pd.to_numeric(categories[column])        
+        categories[column] = pd.to_numeric(categories[column])
     # drop and concatenate the original dataframe with the new `categories` dataframe
     df.drop(['categories'],axis = 1, inplace = True)
     df = pd.concat([df,categories],axis = 1)
@@ -35,13 +43,21 @@ def clean_data(df):
     pass
 
 
-def save_data(df, database_filename): 
+def save_data(df, database_filename):
+    '''
+    The function saves the clean dataset into an sqlite database.
+    '''
     engine = create_engine('sqlite:///{}'.format(database_filename))
-    df.to_sql('DR_MSG', engine, index=False)
-    pass  
+    #use the if_exists='replace' option in to_sql() when saving the data so that
+    # the pipeline can be executed several times without having a ValueError.
+    df.to_sql('DR_MSG', engine, index=False,if_exists='replace')
+    pass
 
 
 def main():
+    '''
+    The main() function combines and executes all the above modules.
+    '''
     if len(sys.argv) == 4:
         #print('sys.argv[1:] is :', sys.argv[1:])
 
@@ -56,9 +72,9 @@ def main():
         #print('df is:', df.head())
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
-        
+
         print('Cleaned data saved to database!')
-    
+
     else:
         print('Please provide the filepaths of the messages and categories '\
               'datasets as the first and second argument respectively, as '\

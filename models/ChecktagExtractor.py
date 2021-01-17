@@ -6,12 +6,13 @@ os.system("pip install textblob")
 from sklearn.base import BaseEstimator, TransformerMixin
 from textblob import TextBlob
 
-class ChecktagExtractor(BaseEstimator, TransformerMixin):    
+class ChecktagExtractor(BaseEstimator, TransformerMixin):
         def check_pos_tag(self,X):
-            
-        #The class defines the transformer of tag check.
-        #The function computers the frequency of 5 word classes: Noun,Pron,Verb,Adj,Adv.
-     
+
+        '''
+        The function defines the transformer of tag check.
+        Return: the frequency of 5 word classes: Noun,Pron,Verb,Adj,Adv.
+        '''
             pos_family = {
         'noun' : ['NN','NNS','NNP','NNPS'],
         'pron' : ['PRP','PRP$','WP','WP$'],
@@ -41,13 +42,15 @@ class ChecktagExtractor(BaseEstimator, TransformerMixin):
             return cnt
 
         def fit(self, X,Y):
-            #Model training function
-            
+            '''
+            Model training function
+            '''
                 Y = None
                 return self
 
         def transform(self, X):
-            #Model predicting function  
-            
+            '''
+            Model predicting function
+            '''
             X_tagged = self.check_pos_tag(X)
             return pd.DataFrame(X_tagged)

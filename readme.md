@@ -29,7 +29,7 @@
   	
   	One solution maybe to adjust the weights of different categories to compute their precisions or recalls.
  
-#model
+#Model
 
   The trained model is stored in a pickle file: 'classifier.pkl' under folder 'models'.
 
@@ -47,7 +47,7 @@
     You can find find 'run.py' in folder 'app'. Run the following command in the app's directory to run your web app.`python run.py` and Go to the specified host and port, you are supposed to access the webpage.
 
 
-  *ETL pipeline:
+  *ETL Pipeline:
     you can find its code in 'process_data.py' under folder 'data'. Its functions include:
       Loads the messages and categories datasets
       Merges the two datasets
@@ -66,3 +66,10 @@
       In addtion to the ML pipeline, you can find 2 extra modules:
         'ChecktagExtractor.py' can get count the token's frequency in a message according to their word category. This can help model to approach more features of the data.
         'Tokennize.py' can tokenize and lemmatize the message contents.
+        
+#Run Project Web App
+	Run the following command in the app's directory to run the project web app.
+    `python run.py`
+    Run the following command
+    Go to https://view6914b2f4-3001.udacity-student-workspaces.com/
+
