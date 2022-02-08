@@ -43,8 +43,8 @@
 
 ## Run Web App
 
-   * open `python run.py`
-   * Go to https://view6914b2f4-3001.udacity-student-workspaces.com/
+   * Type in `python run.py` in the Terminal Window.
+   * Go to https://view6914b2f4-3001.udacity-student-workspaces.com/.
    Note: The app run on Udacity's virtual server. The host and port are specified as 'host='0.0.0.0', port=3001'.
    
     
