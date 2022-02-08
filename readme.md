@@ -1,76 +1,51 @@
 
-#Project Overview
+# Project Overview
 
-  In this project, I analyzed disaster data from Figure Eight to build a model for an API that classifies disaster messages.
+   In this project, we analyzed disaster data from Figure Eight to build a model for an API that classifies disaster messages.
 
-#Goal
-
-  A machine learning pipeline to categorize the disaster events are created in
-  this project, so that it can send the messages to an appropriate disaster
-  relief agency/category.
-
-#Environment
-
-  The virtual workspace IDE and data set are offered by Udacity.
+## Background
+   Every day, disaster organizations get millions and millions of disaster communications either direct or via social media. Often 1 in every 1000 these messages might be relevant to the disaster response profesionals. Typical different organnizations will respond to different type of msgs and take care of different parts of disaster. The organization expect the least capacity to filter and pull out the msgs which are the most important. The basic idea of this project is to use 'Figure 8' technology for the disasters from which these msgs are taken, then combined these datasets and relabeled them to correponding categories so that they are consistent labels across the different disasters, and to build supervised ML models.
 
 
-#Dataset
+## Dataset 
 
   The data set containing real messages that were sent during disaster events.
-  The raw data: 'disaster_categories.csv' and 'disaster_messages.csv' can be accessed in folder 'data'.
-
-  I used the ETL pipeline to clean the data. The cleaned data is saved as 'DisasterResponse.db' in folder 'data'.
+#### Raw data
+  * 'disaster_categories.csv'   
   
-  * Insights from the dataset
-  	This dataset is imbalanced. Some labels like water,child-alone,tools, shops, firs, cold have very few data, while some like 'related', 'aid-related','Direct Report' have more examples.
-  	To some extend, this imbalance affects the model training. I noted that the latter 3 categories tend to be the easy-predicted results with my model.
-  	Very probably that more weights are put on these 3-4 categories when compute precision or recall for the various categories during the training process.
-  	Thus these categories turn to be match most cases, in other words, they are more possible to be predicted.
-  	
-  	One solution maybe to adjust the weights of different categories to compute their precisions or recalls.
- 
-#Model
+  * 'disaster_messages.csv' 
+  
+#### Cleaned data
+  * 'DisasterResponse.db' (cleaned by ETL pipeline) 
 
-  The trained model is stored in a pickle file: 'classifier.pkl' under folder 'models'.
+## Components
 
-#Components
+  * ETL Pipeline ('process_data.py')
+      * Loads the messages and categories datasets
+      * Merges the two datasets
+      * Cleans the data
+      * Stores it in a SQLite database
 
-  *Flask Web App:
-    where an emergency worker can input a new message and get classification
-    results in several categories.
+  * ML Pipeline ('train_classifier.py')
+      * Loads data from the SQLite database
+      * Splits the dataset into training and test sets
+      * Builds a text processing and machine learning pipeline
+      * Trains and tunes a model using GridSearchCV
+      * Outputs results on the test set
+      * Exports the final model as a pickle file (classifier.pkl)
+	
+ * Flask Web App 
+    
+    where an emergency worker can input a new message and get classification results in several categories.
     The web app will also display visualizations of the message genres and categoris distribution.
+      * master.html
+      * go.html
 
-    You can find the html files of the 2 web pages in folder 'app':
-      'master.html' and 'go.html'
-    The app was run on Udacity's virtual server. The host and port are specified as 'host='0.0.0.0', port=3001'.
+## Run Web App
 
-    You can find find 'run.py' in folder 'app'. Run the following command in the app's directory to run your web app.`python run.py` and Go to the specified host and port, you are supposed to access the webpage.
-
-
-  *ETL Pipeline:
-    you can find its code in 'process_data.py' under folder 'data'. Its functions include:
-      Loads the messages and categories datasets
-      Merges the two datasets
-      Cleans the data
-      Stores it in a SQLite database
-
-  *ML Pipeline:
-    you can find its code in t'rain_classifier.py' under folder 'model'. Its functions include:
-      Loads data from the SQLite database
-      Splits the dataset into training and test sets
-      Builds a text processing and machine learning pipeline
-      Trains and tunes a model using GridSearchCV
-      Outputs results on the test set
-      Exports the final model as a pickle file
-
-      In addtion to the ML pipeline, you can find 2 extra modules:
-        'ChecktagExtractor.py' can get count the token's frequency in a message according to their word category. This can help model to approach more features of the data.
-        'Tokennize.py' can tokenize and lemmatize the message contents.
-        
-#Run Project Web App
-
-	Run the following command in the app's directory to run the project web app.
-    `python run.py`
-    Run the following command
-    Go to https://view6914b2f4-3001.udacity-student-workspaces.com/
+   * open `python run.py`
+   * Go to https://view6914b2f4-3001.udacity-student-workspaces.com/
+   Note: The app run on Udacity's virtual server. The host and port are specified as 'host='0.0.0.0', port=3001'.
+   
+    
 
