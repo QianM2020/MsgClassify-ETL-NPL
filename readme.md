@@ -48,4 +48,22 @@
    Note: The app run on Udacity's virtual server. The host and port are specified as 'host='0.0.0.0', port=3001'.
    
     
+## File Structure
 
+- app
+| - template
+| |- master.html  # main page of web app
+| |- go.html  # classification result page of web app
+|- run.py  # Flask file that runs app
+
+- data
+|- disaster_categories.csv  # data to process 
+|- disaster_messages.csv  # data to process
+|- process_data.py
+|- DisasterResponse.db   # database to save clean data to
+
+- models
+|- train_classifier.py
+|- classifier.pkl  # saved model 
+
+- README.md
